@@ -26,7 +26,7 @@ async function SignIn(data: SignInInterface) {
 }
 async function GetStudents() {
   return await axios
-    .get(`${apiUrl}/student`, requestOptions)
+    .get(`${apiUrl}/students`, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }
