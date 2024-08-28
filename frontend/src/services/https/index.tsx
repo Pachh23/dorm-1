@@ -18,7 +18,7 @@ async function SignInAdmin(data: SignInAdminInterface) {
     .then((res) => res)
     .catch((e) => e.response);
 }
-async function SignIn(data: SignInInterface) {
+async function SignInStudent(data: SignInInterface) {
   return await axios
     .post(`${apiUrl}/signin-student`, data, requestOptions)
     .then((res) => res)
@@ -66,7 +66,7 @@ async function ChangePersonal(data: StudentInterface) {
 
     
 export {
-  SignIn,
+  SignInStudent,
   GetStudents,
   GetStudentsById,
   UpdateStudentsById,

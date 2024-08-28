@@ -1,6 +1,6 @@
 import { Button, Card, Form, Input, message, Flex, Row, Col } from "antd";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { SignIn } from "../../../services/https";
+import { SignInStudent } from "../../../services/https";
 import { SignInInterface } from "../../../interfaces/SignIn";
 import logo from "../../../assets/logo.png"; // Ensure you have the correct path for the logo image
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ function SignInStudentPages() {
   const [messageApi, contextHolder] = message.useMessage();
 
   const onFinish = async (values: SignInInterface) => {
-    let res = await SignIn(values);
+    let res = await SignInStudent(values);
     if (res.status === 200) {
       messageApi.success("Sign-in successful");
       localStorage.setItem("isLogin", "true");
