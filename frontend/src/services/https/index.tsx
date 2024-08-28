@@ -48,19 +48,22 @@ async function DeleteStudentsById(id: string) {
     .then((res) => res)
     .catch((e) => e.response);
 }
+
 async function CreateStudent(data: StudentInterface) {
   return await axios
-    .post(`${apiUrl}/sign`, data, requestOptions)
+    .post(`${apiUrl}/student`, data, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }
 
-async function ChangeUser(data: StudentInterface) {
+
+async function ChangePersonal(data: StudentInterface) {
   return await axios
     .post(`${apiUrl}/signup`, data, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }
+
     
 export {
   SignIn,
@@ -70,5 +73,5 @@ export {
   DeleteStudentsById,
   CreateStudent,
   SignInAdmin,
-  ChangeUser,
+  ChangePersonal,
 };

@@ -1,7 +1,7 @@
 import { Space, Button, Col, Row, Divider, Form, Input, Card, message, DatePicker, InputNumber, Select } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { StudentInterface } from "../../../interfaces/IUser";
-import { ChangeUser } from "../../../services/https";
+import { ChangePersonal } from "../../../services/https";
 import { useNavigate, Link } from "react-router-dom";
 
 function PersonalChange() {
@@ -9,7 +9,7 @@ function PersonalChange() {
 	const [messageApi, contextHolder] = message.useMessage();
 	const onFinish = async (values: StudentInterface) => {
 		try {
-			const res = await ChangeUser(values);
+			const res = await ChangePersonal(values);
 			if (res.status === 201) {
 					messageApi.open({
 						type: "success",
