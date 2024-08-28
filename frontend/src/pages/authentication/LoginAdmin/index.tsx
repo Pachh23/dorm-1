@@ -13,7 +13,7 @@ function SignInAdminPages() {
     if (res.status === 200) {
       messageApi.success("Sign-in successful");
       localStorage.setItem("isLogin", "true");
-      localStorage.setItem("page", "dashboard");
+      localStorage.setItem("page", "homepage");
       localStorage.setItem("token_type", res.data.token_type);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("id", res.data.id);

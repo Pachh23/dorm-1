@@ -16,7 +16,7 @@ func DB() *gorm.DB {
 }
 func ConnectionDB() {
 	database, err := gorm.Open(sqlite.Open("sa.db?cache=shared"), &gorm.Config{})
-	
+
 	if err != nil {
 		panic("failed to connect database")
 	}
@@ -26,7 +26,6 @@ func ConnectionDB() {
 func SetupDatabase() {
 	db.AutoMigrate(
 		&entity.Student{},
-		//&entity.Genders{},
 		&entity.Genders{},
 		&entity.FamilyStatuses{},
 		&entity.Guardians{},
@@ -68,39 +67,19 @@ func SetupDatabase() {
 		StudentID: "B6524449",
 	})
 
+	// Seed ข้อมูล admin
+	adminhashedPassword, _ := HashPassword("Ad01")
+	AdminUser := &entity.Admin{
+		Username:  "jetnipat",
+		FirstName: "Jetnipat ",
+		LastName:  "kunjai",
+		Phone:     "061xxxxxxx",
+		Birthday:  Birthday,
+		Password:  adminhashedPassword,
+	}
+
+	db.FirstOrCreate(AdminUser, &entity.Admin{
+		Username: "username",
+	})
+
 }
-/*
-   hashedPassword, _ := HashPassword("1234567890123")
-   Birthday, _ := time.Parse("2006-01-02", "1988-11-12")
-
-   	User := &entity.Student{
-   		FirstName: "Won",
-   		LastName:  "Woo",
-   		StudentID: "B6524449",
-   		Password:  hashedPassword,
-   		Birthday:  Birthday,
-   		Year:      3,
-   		Major:     "MED",
-   		GenderID:  1,
-   	}
-
-   	db.FirstOrCreate(User, &entity.Student{
-   		StudentID: "B6524449",
-   	})
-
-   // Seed ข้อมูล admin
-   hashedPassword, _ = HashPassword("Ad01")
-
-   	AdminUser := &entity.Admin{
-   		Username:  "jetnipat",
-   		FirstName: "Jetnipat ",
-   		LastName:  "kunjai",
-   		Phone:			"061xxxxxxx",
-   		Birthday:  Birthday,
-   		Password:  hashedPassword,
-   	}
-
-   	db.FirstOrCreate(AdminUser, &entity.Admin{
-   		Username:  "username",
-   	})
-*/

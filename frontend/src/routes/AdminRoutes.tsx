@@ -2,7 +2,7 @@ import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 import Loadable from "../components/third-patry/Loadable";
 import FullLayout from "../layout/FullLayout";
-//import DormLayout from "../layout/DormLayout";
+import DormLayout from "../layout/DormLayout";
 
 const MainPages = Loadable(lazy(() => import("../pages/authentication/LoginStudent")));
 //const LoginAdmin = Loadable(lazy(() => import("../pages/authentication/LoginAdmin")));
@@ -13,10 +13,10 @@ const EditStudent = Loadable(lazy(() => import("../pages/student/edit")));
 const Personal = Loadable(lazy(() => import("../pages/personal")));
 const PersonalChange = Loadable(lazy(() => import("../pages/personal/change")));
 
-const AdminRoutes = (isLoggedIn : boolean): RouteObject => {
+const AdminRoutes = (isLoggedIn : boolean, role: string): RouteObject => {
   return {
     path: "/",
-    element: isLoggedIn ? <FullLayout /> : <MainPages />,
+    element: isLoggedIn ? (role === "student" ? <FullLayout /> : < DormLayout/>) : <MainPages />,
     children: [
       {
         path: "/",

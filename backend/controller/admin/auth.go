@@ -1,5 +1,4 @@
-
-package student
+package admin
 
 import (
 	"net/http"
@@ -11,27 +10,26 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-
-type StudentAuthen struct {
-	StudentID string `json:"student_id"`
-	Password  string `json:"password"`
+type AdminAuthen struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
-// ส่วนของ student
-func SignInStudent(c *gin.Context) {
-	var payload StudentAuthen
-	var students entity.Student
+// ส่วนของ
+func SignInAdmin(c *gin.Context) {
+	var payload AdminAuthen
+	var admins entity.Admin
 	if err := c.ShouldBindJSON(&payload); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	// ค้นหา user ด้วย Username ที่ผู้ใช้กรอกเข้ามา
-	if err := config.DB().Raw("SELECT * FROM students WHERE student_id = ?", payload.StudentID).Scan(&students).Error; err != nil {
+	if err := config.DB().Raw("SELECT * FROM admins WHERE username = ?", payload.Username).Scan(&admins).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	// ตรวจสอบรหัสผ่าน
-	err := bcrypt.CompareHashAndPassword([]byte(students.Password), []byte(payload.Password))
+	err := bcrypt.CompareHashAndPassword([]byte(admins.Password), []byte(payload.Password))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "password is incerrect"})
 		return
@@ -41,12 +39,11 @@ func SignInStudent(c *gin.Context) {
 		Issuer:          "AuthService",
 		ExpirationHours: 24,
 	}
-	signedToken, err := jwtWrapper.GenerateToken(students.StudentID) 
+	signedToken, err := jwtWrapper.GenerateToken(admins.Username)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "error signing token"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"token_type": "Bearer", "token": signedToken, "id": students.ID})
+	c.JSON(http.StatusOK, gin.H{"token_type": "Bearer", "token": signedToken, "id": admins.ID})
 
 }
-
