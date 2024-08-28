@@ -26,7 +26,7 @@ async function SignIn(data: SignInInterface) {
 }
 async function GetStudents() {
   return await axios
-    .get(`${apiUrl}/students`, requestOptions)
+    .get(`${apiUrl}/student`, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }
@@ -50,7 +50,7 @@ async function DeleteStudentsById(id: string) {
 }
 async function CreateStudent(data: StudentInterface) {
   return await axios
-    .post(`${apiUrl}/signup`, data, requestOptions)
+    .post(`${apiUrl}/sign`, data, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }

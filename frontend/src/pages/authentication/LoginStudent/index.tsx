@@ -43,7 +43,7 @@ function SignInStudentPages() {
                 <Form.Item
                   //label="Email"
                   name="student_id"
-                  rules={[{ required: false, message: "Please input your username!" }]}
+                  rules={[{ required: true, message: "Please input your username!" }]}
                   style={{ marginBottom: '20px' }} // Adjust margin here
                 >
                   <Input prefix={<UserOutlined />} placeholder="StudentID" />
@@ -51,7 +51,7 @@ function SignInStudentPages() {
                 <Form.Item
                   //label="Password"
                   name="password"
-                  rules={[{ required: false, message: "Please input your password!" }]}
+                  rules={[{ required: true, message: "Please input your password!" }]}
                   style={{ marginBottom: '20px' }} // Adjust margin here
                 >
                   <Input prefix={<LockOutlined />} type="password" placeholder="Password" />
