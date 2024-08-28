@@ -26,7 +26,7 @@ async function SignIn(data: SignInInterface) {
 }
 async function GetStudents() {
   return await axios
-    .get(`${apiUrl}/student`, requestOptions)
+    .get(`${apiUrl}/students`, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }
@@ -54,12 +54,14 @@ async function CreateStudent(data: StudentInterface) {
     .then((res) => res)
     .catch((e) => e.response);
 }
+
 async function ChangeUser(data: StudentInterface) {
   return await axios
     .post(`${apiUrl}/signup`, data, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }
+    
 export {
   SignIn,
   GetStudents,

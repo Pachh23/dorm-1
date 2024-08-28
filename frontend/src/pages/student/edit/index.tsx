@@ -18,11 +18,13 @@ import { StudentInterface } from "../../../interfaces/IUser";
 import { GetStudentsById, UpdateStudentsById } from "../../../services/https/index";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import dayjs from "dayjs";
+
 function StudentEdit() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: any }>();
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
+
   const getStudentById = async (id: string) => {
     let res = await GetStudentsById(id);
     if (res.status == 200) {

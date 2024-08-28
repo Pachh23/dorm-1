@@ -66,7 +66,7 @@ func SetupDatabase() {
 	db.FirstOrCreate(User, &entity.Student{
 		StudentID: "B6524449",
 	})
-
+/*
 	// Seed ข้อมูล admin
 	adminhashedPassword, _ := HashPassword("Ad01")
 	AdminUser := &entity.Admin{
@@ -79,7 +79,8 @@ func SetupDatabase() {
 	}
 
 	db.FirstOrCreate(AdminUser, &entity.Admin{
-		Username: "username",
+		Username: "jetnipat",
 	})
+		*/
 
 }

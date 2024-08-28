@@ -22,9 +22,9 @@ type JwtClaim struct {
 
 // GenerateToken generates a jwt token
 // Generate Token generates a jwt token
-func (j *JwtWrapper) GenerateToken(studentID string) (signedToken string, err error) {
+func (j *JwtWrapper) GenerateToken(student_id string) (signedToken string, err error) {
 	claims := &JwtClaim{
-		StudentID: studentID,
+		StudentID: student_id,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Local().Add(time.Hour * time.Duration(j.ExpirationHours)).Unix(),
 			Issuer:    j.Issuer,

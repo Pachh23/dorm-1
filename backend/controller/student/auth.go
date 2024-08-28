@@ -20,18 +20,18 @@ type StudentAuthen struct {
 // ส่วนของ student
 func SignInStudent(c *gin.Context) {
 	var payload StudentAuthen
-	var students entity.Student
+	var student entity.Student
 	if err := c.ShouldBindJSON(&payload); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	// ค้นหา user ด้วย Username ที่ผู้ใช้กรอกเข้ามา
-	if err := config.DB().Raw("SELECT * FROM students WHERE student_id = ?", payload.StudentID).Scan(&students).Error; err != nil {
+	if err := config.DB().Raw("SELECT * FROM students WHERE student_id = ?", payload.StudentID).Scan(&student).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	// ตรวจสอบรหัสผ่าน
-	err := bcrypt.CompareHashAndPassword([]byte(students.Password), []byte(payload.Password))
+	err := bcrypt.CompareHashAndPassword([]byte(student.Password), []byte(payload.Password))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "password is incerrect"})
 		return
@@ -41,12 +41,12 @@ func SignInStudent(c *gin.Context) {
 		Issuer:          "AuthService",
 		ExpirationHours: 24,
 	}
-	signedToken, err := jwtWrapper.GenerateToken(students.StudentID) 
+	signedToken, err := jwtWrapper.GenerateToken(student.StudentID) 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "error signing token"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"token_type": "Bearer", "token": signedToken, "id": students.ID})
+	c.JSON(http.StatusOK, gin.H{"token_type": "Bearer", "token": signedToken, "id": student.ID})
 
 }
 
