@@ -1,13 +1,14 @@
 import { Space, Button, Col, Row, Divider, Form, Input, Card, message, DatePicker, InputNumber, Select } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-import { StudentInterface } from "../../../interfaces/IUser";
+//import { StudentInterface } from "../../../interfaces/IUser";
+import { PersonalAllInterface } from "../../../interfaces/PersonalAll";
 import { ChangePersonal } from "../../../services/https";
 import { useNavigate, Link } from "react-router-dom";
 
 function PersonalChange() {
 	const navigate = useNavigate();
 	const [messageApi, contextHolder] = message.useMessage();
-	const onFinish = async (values: StudentInterface) => {
+	const onFinish = async (values: PersonalAllInterface) => {
 		try {
 			const res = await ChangePersonal(values);
 			if (res.status === 201) {
@@ -48,7 +49,8 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ชื่อเล่น"
-									name="nickname"
+									/*{['address', 'house_no']}*/
+									name={['personalInfo', 'nickname']}
 									rules={[{ required: true, message: "กรุณากรอกชื่อเล่น" }]}
 								> 
 								<Input />
@@ -57,7 +59,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="รหัสบัตรประชาชน"
-									name="citizen_id"
+									name={['personalInfo', 'citizen_id']}
 									rules={[{ required: true, message: "กรุณากรอกรหัสบัตรประชาชน" },
 													{pattern: /^[0-9]{13}$/, message: "กรุณากรอกรหัสบัตรประชาชนที่ถูกต้อง (13 หลัก)" }]}
 									>
@@ -67,7 +69,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="หมายเลขโทรศัพท์มือถือ"
-									name="phone"
+									name={['personalInfo', 'phone']}
 									rules={[{ required: true, message: "กรุณากรอกหมายเลขโทรศัพท์มือถือ" },
 												{pattern: /^[0-9]{10}$/, message: "กรุณากรอกหมายเลขโทรศัพท์มือถือ (10 หลัก)" }]}
 								>
@@ -77,7 +79,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="สัญชาติ"
-									name="nationality"
+									name={['personalInfo', 'nationality']}
 									rules={[{ required: true, message: "กรุณากรอกสัญชาติ" }]}
 								>
 									<Input />
@@ -86,7 +88,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="เชื้อชาติ"
-									name="race"
+									name={['personalInfo', 'race']}
 									rules={[{ required: true, message: "กรุณากรอกเชื้อชาติ" }]}
 								>
 									<Input />
@@ -95,7 +97,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ศาสนา"
-									name="religion"
+									name={['personalInfo', 'religion']}
 									rules={[{ required: true, message: "กรุณากรอกศาสนา" }]}
 								>
 									<Input />
@@ -104,7 +106,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="กลุ่มเลือด"
-									name="blood_group"
+									name={['personalInfo', 'blood_group']}
 									rules={[{ required: true, message: "กรุณากรอกกลุ่มเลือด" }]}
 								>
 									<Input />
@@ -113,7 +115,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 										label="โรคประจำตัว(ถ้ามี)"
-										name="UD"
+										name={['personalInfo', 'UD']}
 								>
 									<Input />
 								</Form.Item>
@@ -124,7 +126,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="บ้านเลขที่"
-									name="house_no"
+									name={['address', 'house_no']}
 									rules={[{ required: true, message: "กรุณากรอกบ้านเลขที่" }]}
 								>
 									<Input />
@@ -133,7 +135,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="หมู่ที่"
-									name="village_no"
+									name={['address', 'village_no']}
 									rules={[{ required: true, message: "กรุณากรอกบ้านหมู่ที่" }]}
 								>
 									<Input />
@@ -142,7 +144,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ชื่อหมู่บ้าน"
-									name="village"
+									name={['address', 'village']}
 									rules={[{ required: true, message: "กรุณากรอกชื่อหมู่บ้าน" }]}
 								>
 									<Input />
@@ -151,7 +153,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ซอย"
-									name="alley"
+									name={['address', 'alley']}
 									rules={[{ required: true, message: "กรุณากรอกซอย" }]}
 								>
 									<Input />
@@ -160,7 +162,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ถนน"
-									name="road"
+									name={['address', 'road']}
 									rules={[{ required: true, message: "กรุณากรอกถนน !" }]}
 								>
 									<Input />
@@ -169,7 +171,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ตำบล/แขวง"
-									name="sub_district"
+									name={['address', 'sub_district']}
 									rules={[{ required: true, message: "กรุณากรอกตำบล/แขวง" }]}
 								>
 									<Input />
@@ -178,7 +180,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="อำเภอ/เขต"
-									name="district"
+									name={['address', 'district']}
 									rules={[{ required: true, message: "กรุณากรอกอำเภอ/เขต" }]}
 									>
 									<Input />
@@ -187,9 +189,8 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="จังหวัด"
-									name="province"
+									name={['address', 'province']}
 									rules={[{ required: true, 
-														pattern: /^[ก-ฮA-Za-z\s]{1,50}$/, 
 														message: "กรุณากรอกชื่อจังหวัดที่ถูกต้อง",}]}
 								>
 									<Input />
@@ -198,7 +199,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="รหัสไปรษณีย์"
-									name="post_code"
+									name={['address', 'post_code']}
 									rules={[{ required: true, message: "กรุณากรอกรหัสไปรษณีย์" },
 										{pattern: /^[0-9]{5}$/, message: "กรุณากรอกรหัสไปรษณีย์ (5 หลัก)" }]}
 									>
@@ -211,7 +212,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ชื่อ - สกุลบิดา"
-									name="fathers_name"
+									name={['family', 'fathers_name']}
 									rules={[{ required: true, message: "กรุณากรอกชื่อ-สกุลบิดา" }]}
 								>
 									<Input />
@@ -220,7 +221,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ชื่อ - สกุลมารดา"
-									name="mathers_name"
+									name={['family', 'mathers_name']}
 									rules={[{ required: true, message: "กรุณากรอกชื่อ-สกุลมารดา" }]}
 								>
 									<Input />
@@ -229,7 +230,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="อาชีพบิดา"
-									name="occupation_father"
+									name={['family', 'occupation_father']}
 									rules={[{ required: true, message: "กรุณากรอกอาชีพบิดา" }]}
 								>
 									<Input />
@@ -238,7 +239,7 @@ function PersonalChange() {
 								<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 									<Form.Item
 										label="อาชีพมารดา"
-										name="occupation_mather"
+										name={['family', 'occupation_mather']}
 										rules={[{ required: true, message: "กรุณากรอกอาชีพมารดา" }]}
 									>
 										<Input />
@@ -247,7 +248,7 @@ function PersonalChange() {
 								<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 									<Form.Item
 										label="หมายเลขโทรศัพท์มือถือบิดา"
-										name="phone_father"
+										name={['family', 'phone_father']}
 										rules={[{ required: true, message: "กรุณากรอกหมายเลขโทรศัพท์มือถือ" },
 														{ pattern: /^[0-9]{10}$/, message: "กรุณากรอกหมายเลขโทรศัพท์มือถือ (10 หลัก)" }]}
 									>
@@ -257,7 +258,7 @@ function PersonalChange() {
 								<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 									<Form.Item
 										label="หมายเลขโทรศัพท์มือถือมารดา"
-										name="phone_mather"
+										name={['family', 'phone_mather']}
 										rules={[{ required: true, message: "กรุณากรอกหมายเลขโทรศัพท์มือถือ" },
 														{ pattern: /^[0-9]{10}$/, message: "กรุณากรอกหมายเลขโทรศัพท์มือถือ (10 หลัก)" }]}
 									>
@@ -267,7 +268,7 @@ function PersonalChange() {
 								<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 									<Form.Item
 										label="สถานภาพครอบครัว"
-										name="family_status_id"
+										name={['family', 'family_status_id']}
 										rules={[
 												{
 												required: true,
@@ -289,7 +290,7 @@ function PersonalChange() {
 								<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 									<Form.Item
 										label="ผู้ปกครอง"
-										name="guardian_id"
+										name={['family', 'guardian_id']}
 										rules={[{ required: true, message: "กรุณาเลือกผู้ปกครอง",}]}
 									>
 									<Select
@@ -307,7 +308,7 @@ function PersonalChange() {
 								<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 									<Form.Item
 										label="หรือผู้ปกครอง ชื่อ/สกุล"
-										name="or_guardians_name"
+										name={['family', 'or_guardians_name']}
 									>
 										<Input />
 									</Form.Item>
@@ -315,7 +316,7 @@ function PersonalChange() {
 								<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 									<Form.Item
 										label="เกี่ยวข้องเป็น"
-										name="relationship"
+										name={['family', 'relationship']}
 									>
 										<Input />
 									</Form.Item>
@@ -323,7 +324,7 @@ function PersonalChange() {
 								<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 									<Form.Item
 										label="อาชีพ"
-										name="OccupationGuardian"
+										name={['family', 'OccupationGuardian']}
 									>
 										<Input />
 									</Form.Item>
@@ -331,7 +332,7 @@ function PersonalChange() {
 								<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 									<Form.Item
 										label="หมายเลขโทรศัพท์มือถือ"
-										name="phone_guardian"
+										name={['family', 'phone_guardian']}
 										rules={[{ message: "กรุณากรอกหมายเลขโทรศัพท์มือถือ" },
 														{ pattern: /^[0-9]{10}$/, message: "กรุณากรอกหมายเลขโทรศัพท์มือถือ (10 หลัก)" }]}
 									>
@@ -344,7 +345,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="สำเร็จการศึกษาขั้นสุดท้ายจาก"
-									name="latest_graduation_from"
+									name={['otherInfo', 'latest_graduation_from']}
 									rules={[{ required: true, message: "กรุณากรอกชื่อโรงเรียน" }]}
 								>
 									<Input placeholder="กรอกชื่อโรงเรียน" />
@@ -354,7 +355,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="เมื่อปี พ.ศ."
-									name="graduated_year"
+									name={['otherInfo', 'graduated_year']}
 									rules={[{ required: true, message: "กรุณากรอก พ.ศ.",}]}
 								>
 								<InputNumber
@@ -367,7 +368,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="GPAX"
-									name="gpax"
+									name={['otherInfo', 'gpax']}
 									rules={[{ required: true, message: "กรุณากรอก gpax",}]}
 								>
 								<InputNumber
@@ -381,7 +382,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="พาหนะส่วนตัวที่ใช้"
-									name="personal_vehicles"
+									name={['otherInfo', 'personal_vehicles']}
 								>
 									<Input />
 								</Form.Item>
@@ -389,7 +390,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="สี"
-									name="color"
+									name={['otherInfo', 'color']}
 								>
 									<Input />
 								</Form.Item>
@@ -397,7 +398,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="หมายเลขทะเบียน"
-									name="plate_no"
+									name={['otherInfo', 'plate_no']}
 								>
 									<Input />
 								</Form.Item>
@@ -405,7 +406,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="วันครบกำหนดเสียภาษี"
-									name="tax_date"
+									name={['otherInfo', 'tax_date']}
 								>
 									<DatePicker style={{ width: "100%" }} />
 								</Form.Item>
@@ -413,7 +414,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="จังหวัด"
-									name="province"
+									name={['otherInfo', 'province']}
 									rules={[{
 											pattern: /^[ก-ฮA-Za-z\s]{1,50}$/, 
 											message: "กรุณากรอกชื่อจังหวัดที่ถูกต้อง",
@@ -425,7 +426,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ใบขับขี่"
-									name="driver_license"
+									name={['otherInfo', 'driver_license']}
 									rules={[
 											{
 											message: "กรุณาเลือกใบขับขี่",
@@ -446,7 +447,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="ประเภท (ถ้ามี)"
-									name="type"
+									name={['otherInfo', 'type']}
 								>
 									<Input />
 								</Form.Item>
@@ -454,7 +455,7 @@ function PersonalChange() {
 							<Col xs={24} sm={24} md={24} lg={24} xl={12}>
 								<Form.Item
 									label="วันบัตรหมดอายุ"
-									name="expired_card"
+									name={['otherInfo', 'expired_card']}
 								>
 									<DatePicker style={{ width: "100%" }} />
 								</Form.Item>

@@ -1,4 +1,5 @@
 import { StudentInterface } from "../../interfaces/IUser";
+import { PersonalAllInterface } from "../../interfaces/PersonalAll";
 //import { AdminInterface } from "../../interfaces/Admin";
 import { SignInInterface } from "../../interfaces/SignIn";
 import { SignInAdminInterface } from "../../interfaces/SignInAdmin";
@@ -51,20 +52,38 @@ async function DeleteStudentsById(id: string) {
 
 async function CreateStudent(data: StudentInterface) {
   return await axios
-    .post(`${apiUrl}/student`, data, requestOptions)
+    .post(`${apiUrl}/customer-create`, data, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }
 
-
-async function ChangePersonal(data: StudentInterface) {
+async function ChangePersonal(data: PersonalAllInterface) {
   return await axios
-    .post(`${apiUrl}/signup`, data, requestOptions)
+    .post(`${apiUrl}/personal`, data, requestOptions)
     .then((res) => res)
     .catch((e) => e.response);
 }
+/*
+async function CreateStudent(data: StudentInterface) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  };
 
-    
+  let res = await fetch(`${apiUrl}/students`, requestOptions)
+    .then((res) => {
+      if (res.status == 201) {
+        return res.json();
+      } else {
+        return false;
+      }
+    });
+
+  return res;
+}
+*/
+
 export {
   SignInStudent,
   GetStudents,

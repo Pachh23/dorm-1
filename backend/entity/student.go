@@ -34,4 +34,5 @@ type Student struct {
 	// One-to-one relationship with PersonalInformation
 	PersonalInformationID uint
 	PersonalInformation   PersonalInformation `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	
 }

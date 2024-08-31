@@ -18,6 +18,7 @@ func GetAll(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, students)
 }
+
 func Get(c *gin.Context) {
 	ID := c.Param("id")
 	var student entity.Student
@@ -33,6 +34,7 @@ func Get(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, student)
 }
+
 func Update(c *gin.Context) {
 	var student entity.Student
 	StudentID := c.Param("id")
@@ -53,6 +55,7 @@ func Update(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "Updated successful"})
 }
+
 func Delete(c *gin.Context) {
 	id := c.Param("id")
 	db := config.DB()

@@ -23,11 +23,13 @@ func main() {
 	// Auth Route
 	r.POST("/signin-student", student.SignInStudent)
 	r.POST("/signin-admin", admin.SignInAdmin)
+	//r.POST("/customer-create", student.SignUp)
 
 	router := r.Group("/")
 	{
 		router.Use(middlewares.Authorizes())
 		// User Route
+		router.POST("/customer-create", student.CreateStudents)
 		router.PUT("/student/:id", student.Update)
 		router.GET("/students", student.GetAll)
 		router.GET("/student/:id", student.Get)

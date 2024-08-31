@@ -16,9 +16,11 @@ import { PlusOutlined } from "@ant-design/icons";
 import { StudentInterface } from "../../../interfaces/IUser";
 import { CreateStudent } from "../../../services/https";
 import { useNavigate, Link } from "react-router-dom";
+
 function StudentCreate() {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+  
   const onFinish = async (values: StudentInterface) => {
     let res = await CreateStudent(values);
    
@@ -33,10 +35,12 @@ function StudentCreate() {
     } else {
       messageApi.open({
         type: "error",
-        content: res.data.error,
+        content: "เกิดข้อผิดพลาด",
+        //content: res.data.error,
       });
     }
   };
+  
   return (
     <div>
       {contextHolder}
